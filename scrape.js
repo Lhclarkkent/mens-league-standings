@@ -1,4 +1,29 @@
-1s
+// scrape.js
+// Pulls standings and rosters from public ESPN fantasy football leagues
+// and writes them to docs/data.json for the static site to read.
+//
+// Config comes from environment variables (set as GitHub Actions repo
+// variables so you never have to edit code to change a league ID):
+//   SEASON        e.g. "2026"
+//   LEAGUE_A_ID   ESPN league ID for Division A
+//   LEAGUE_B_ID   ESPN league ID for Division B
+//   LEAGUE_C_ID   ESPN league ID for Division C
+//   LEAGUE_A_LABEL, LEAGUE_B_LABEL, LEAGUE_C_LABEL   optional display names
+//
+// Leagues MUST be set to public in ESPN league settings or this will fail.
+
+import { writeFile, mkdir } from "fs/promises";
+
+var SEASON = process.env.SEASON || String(new Date().getFullYear());
+
+var DIVISIONS = [
+  { key: "A", id: process.env.LEAGUE_A_ID, label: process.env.LEAGUE_A_LABEL || "Division A", color: "#C9A227" },
+  { key: "B", id: process.env.LEAGUE_B_ID, label: process.env.LEAGUE_B_LABEL || "Division B", color: "#5C8A72" },
+  { key: "C", id: process.env.LEAGUE_C_ID, label: process.env.LEAGUE_C_LABEL || "Division C", color: "#BC4B2C" }
+].filter(function (d) { return d.id && d.id.trim().length > 0; });
+
+var POSITION_MAP = {
+  0: "QB", 1: "TQB", 2: "RB", 3: "RB/WR", 4: "WR", 5:1s
 Run node scrape.js
 Failed to fetch Division A: Unexpected end of JSON input
 Error: ENOENT: no such file or directory, open 'docs/data.json'
