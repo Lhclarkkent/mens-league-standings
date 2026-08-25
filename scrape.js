@@ -38,15 +38,39 @@ var PRO_TEAM_MAP = {
 };
 
 async function fetchLeague(division) {
-  var url = "https://fantasy.espn.com/apis/v3/games/ffl/seasons/" + SEASON +
+  var apiUrl = "https://fantasy.espn.com/apis/v3/games/ffl/seasons/" + SEASON +
     "/segments/0/leagues/" + division.id + "?view=mStandings&view=mTeam&view=mRoster";
+  var pageUrl = "https://fantasy.espn.com/football/league?leagueId=" + division.id;
 
-  var res = await fetch(url, {
-    headers: {
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
-      "Accept": "application/json"
-    }
-  });
+  var browserHeaders = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.espn.com/"
+  };
+
+  // Warm-up request: some anti-bot systems require hitting the normal
+  // page first to establish a session cookie before the API responds.
+  var cookieJar = "";
+  try {
+    var warmup = await fetch(pageUrl, { headers: browserHeaders });
+    var setCookie = warmup.headers.get("set-cookie");
+    if (setCookie) cookieJar = setCookie;
+    console.log("Warm-up request status: " + warmup.status);
+  } catch (e) {
+    console.log("Warm-up request failed (continuing anyway): " + e.message);
+  }
+
+  var apiHeaders = {
+    "User-Agent": browserHeaders["User-Agent"],
+    "Accept": "application/json",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": pageUrl,
+    "x-fantasy-source": "kona"
+  };
+  if (cookieJar) apiHeaders["Cookie"] = cookieJar;
+
+  var res = await fetch(apiUrl, { headers: apiHeaders });
 
   var rawText = await res.text();
   console.log("--- " + division.label + " (league " + division.id + ") ---");
