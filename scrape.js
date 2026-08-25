@@ -1,4 +1,16 @@
-// scrape.js
+1s
+Run node scrape.js
+Failed to fetch Division A: Unexpected end of JSON input
+Error: ENOENT: no such file or directory, open 'docs/data.json'
+    at async open (node:internal/fs/promises:637:25)
+    at async writeFile (node:internal/fs/promises:1219:14)
+    at async main (file:///home/runner/work/mens-league-standings/mens-league-standings/scrape.js:113:3) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'docs/data.json'
+}
+Error: Process completed with exit code 1.// scrape.js
 // Pulls standings + rosters from public ESPN fantasy football leagues
 // and writes them to docs/data.json for the static site to read.
 //
