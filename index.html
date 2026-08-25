@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cornerstone Men's League - Combined Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #16213E;
+    --navy-2: #1F2C4E;
+    --border: #3A4A73;
+    --gold: #C9A227;
+    --cream: #F7F4EF;
+    --muted: #7C8AB0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'Work Sans', 'Helvetica Neue', sans-serif;
+  }
+  .field-lines {
+    background-image: repeating-linear-gradient(90deg, transparent, transparent 78px, rgba(247,244,239,0.05) 78px, rgba(247,244,239,0.05) 80px);
+    border-bottom: 3px solid var(--gold);
+    padding: 2.5rem 1.5rem 2rem;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.75rem;
+  }
+  .sort-row { display: flex; gap: 1.5rem; align-items: center; margin: 2rem 0 0.75rem; flex-wrap: wrap; }
+  .sort-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .sort-btn {
+    background: none; border: none; color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; padding: 0.25rem 0;
+  }
+  .sort-btn.active { color: var(--gold); }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: var(--navy-2); }
+  th {
+    text-align: center; padding: 0.75rem 1rem;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+    border-bottom: 2px solid var(--gold);
+  }
+  th.left { text-align: left; }
+  td { padding: 0.75rem 1rem; text-align: center; }
+  td.left { text-align: left; font-weight: 600; }
+  .board { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .rank, .pa { color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
+  .stat { font-family: 'IBM Plex Mono', monospace; }
+  .pill { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; font-weight: 600; padding: 0.15rem 0.45rem; border-radius: 4px; }
+  tbody tr:nth-child(even) { background: #1A2542; }
+  .empty, .error {
+    margin-top: 2rem; text-align: center; padding: 2.5rem 1rem; color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem;
+  }
+  .error { color: #E0A17E; }
+  .matchup-board { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-top: 1rem; }
+  .matchup-div-header {
+    background: var(--navy-2); padding: 0.5rem 1rem;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  }
+  .matchup-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.65rem 1rem; border-top: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  .matchup-team { flex: 1; }
+  .matchup-team.right { text-align: right; }
+  .matchup-score {
+    font-family: 'IBM Plex Mono', monospace; font-weight: 600;
+    padding: 0 1rem; min-width: 90px; text-align: center; color: var(--gold);
+  }
+  .week-tab-btn {
+    background: var(--navy-2); border: 1px solid var(--border); color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem;
+    padding: 0.4rem 0.9rem; border-radius: 6px; cursor: pointer;
+  }
+  .week-tab-btn.active { background: var(--gold); color: var(--navy); border-color: var(--gold); font-weight: 600; }
+  .footer-note { margin: 2rem 0 1rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+  <div class="field-lines">
+    <div class="wrap">
+      <div class="eyebrow">Cornerstone Men's League | Combined Board</div>
+      <h1>Three Divisions.<br />One Standings Board.</h1>
+      <div class="meta" id="meta">Loading...</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="sort-row">
+      <span class="sort-label">Sort by</span>
+      <button class="sort-btn active" data-sort="winPct">Record</button>
+      <button class="sort-btn" data-sort="pointsFor">Points For</button>
+      <button class="sort-btn" data-sort="division">Division</button>
+    </div>
+    <div id="content"></div>
+    <div class="footer-note">Standings are updated by hand each week from the ESPN app.</div>
+
+    <div style="margin-top: 3rem;">
+      <h2 style="font-family: 'Anton', sans-serif; font-size: 1.6rem; margin: 0 0 1rem; text-transform: uppercase; letter-spacing: 0.03em;">
+        Schedule &amp; Scores
+      </h2>
+      <div class="sort-row" id="weekTabs" style="margin-top: 0;"></div>
+      <div id="scheduleContent"></div>
+    </div>
+  </div>
+
+<script>
+var DIVISION_COLORS = { A: "#C9A227", B: "#5C8A72", C: "#BC4B2C" };
+var allTeams = [];
+var sortKey = "winPct";
+
+function parseCsv(text) {
+  var lines = text.split(/\r?\n/).filter(function (l) { return l.trim().length > 0; });
+  if (lines.length < 2) return [];
+  var rows = lines.slice(1); // skip header
+  return rows.map(function (line) {
+    var parts = line.split(",");
+    var division = (parts[0] || "").trim();
+    var team = (parts[1] || "").trim();
+    var wins = parseInt(parts[2], 10) || 0;
+    var losses = parseInt(parts[3], 10) || 0;
+    var ties = parseInt(parts[4], 10) || 0;
+    var pointsFor = parseFloat(parts[5]) || 0;
+    var pointsAgainst = parseFloat(parts[6]) || 0;
+    var games = wins + losses + ties;
+    var winPct = games > 0 ? (wins + ties * 0.5) / games : 0;
+    return {
+      division: division,
+      divisionColor: DIVISION_COLORS[division] || "#7C8AB0",
+      name: team,
+      wins: wins, losses: losses, ties: ties,
+      pointsFor: pointsFor, pointsAgainst: pointsAgainst,
+      winPct: winPct
+    };
+  }).filter(function (t) { return t.name.length > 0; });
+}
+
+function fmtPct(p) { return Math.round(p * 100) + "%"; }
+function fmtPts(p) { return Number(p).toFixed(1); }
+
+function sortTeams(teams) {
+  var copy = teams.slice();
+  if (sortKey === "winPct") copy.sort(function (a, b) { return (b.winPct - a.winPct) || (b.pointsFor - a.pointsFor); });
+  if (sortKey === "pointsFor") copy.sort(function (a, b) { return b.pointsFor - a.pointsFor; });
+  if (sortKey === "division") copy.sort(function (a, b) { return a.division.localeCompare(b.division) || (b.winPct - a.winPct); });
+  return copy;
+}
+
+function render() {
+  var content = document.getElementById("content");
+  if (allTeams.length === 0) {
+    content.innerHTML = '<div class="empty">No standings entered yet.</div>';
+    return;
+  }
+  var sorted = sortTeams(allTeams);
+  var rows = "";
+  sorted.forEach(function (t, i) {
+    rows += "<tr>" +
+      '<td class="rank">' + (i + 1) + "</td>" +
+      '<td class="left">' + t.name + "</td>" +
+      '<td><span class="pill" style="background:' + t.divisionColor + ';color:#16213E">' + t.division + "</span></td>" +
+      '<td class="stat">' + t.wins + "-" + t.losses + "-" + t.ties + "</td>" +
+      '<td class="stat">' + fmtPct(t.winPct) + "</td>" +
+      '<td class="stat">' + fmtPts(t.pointsFor) + "</td>" +
+      '<td class="pa stat">' + fmtPts(t.pointsAgainst) + "</td>" +
+      "</tr>";
+  });
+
+  content.innerHTML =
+    '<div class="board"><table><thead><tr>' +
+    '<th>Rank</th><th class="left">Team</th><th>Div</th><th>W-L-T</th><th>Win %</th><th>PF</th><th>PA</th>' +
+    "</tr></thead><tbody>" + rows + "</tbody></table></div>";
+}
+
+document.querySelectorAll(".sort-btn").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    sortKey = btn.getAttribute("data-sort");
+    document.querySelectorAll(".sort-btn").forEach(function (b) { b.classList.remove("active"); });
+    btn.classList.add("active");
+    render();
+  });
+});
+
+fetch("standings.csv?" + Date.now())
+  .then(function (r) { return r.text(); })
+  .then(function (text) {
+    allTeams = parseCsv(text);
+    var meta = document.getElementById("meta");
+    meta.textContent = "Updated by hand | " + new Date().toLocaleDateString();
+    render();
+  })
+  .catch(function () {
+    document.getElementById("content").innerHTML = '<div class="error">Could not load standings.csv.</div>';
+  });
+
+// ---- Schedule / Scores ----
+var scheduleByWeek = {};
+var currentWeek = null;
+
+function parseScheduleCsv(text) {
+  var lines = text.split(/\r?\n/).filter(function (l) { return l.trim().length > 0; });
+  if (lines.length < 2) return {};
+  var rows = lines.slice(1);
+  var byWeek = {};
+  rows.forEach(function (line) {
+    var parts = line.split(",");
+    var week = (parts[0] || "").trim();
+    var division = (parts[1] || "").trim();
+    var team1 = (parts[2] || "").trim();
+    var score1 = (parts[3] || "").trim();
+    var team2 = (parts[4] || "").trim();
+    var score2 = (parts[5] || "").trim();
+    if (!team1 || !team2) return;
+    if (!byWeek[week]) byWeek[week] = [];
+    byWeek[week].push({ division: division, team1: team1, score1: score1, team2: team2, score2: score2 });
+  });
+  return byWeek;
+}
+
+function renderWeekTabs() {
+  var tabsEl = document.getElementById("weekTabs");
+  var weeks = Object.keys(scheduleByWeek).sort(function (a, b) { return parseInt(a, 10) - parseInt(b, 10); });
+  if (weeks.length === 0) {
+    tabsEl.innerHTML = "";
+    return;
+  }
+  if (!currentWeek || weeks.indexOf(currentWeek) === -1) currentWeek = weeks[0];
+  var html = '<span class="sort-label">Week</span>';
+  weeks.forEach(function (w) {
+    var activeClass = w === currentWeek ? " active" : "";
+    html += '<button class="week-tab-btn' + activeClass + '" data-week="' + w + '">' + w + "</button>";
+  });
+  tabsEl.innerHTML = html;
+  tabsEl.querySelectorAll(".week-tab-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      currentWeek = btn.getAttribute("data-week");
+      renderWeekTabs();
+      renderSchedule();
+    });
+  });
+}
+
+function renderSchedule() {
+  var el = document.getElementById("scheduleContent");
+  var matchups = scheduleByWeek[currentWeek] || [];
+  if (matchups.length === 0) {
+    el.innerHTML = '<div class="empty">No matchups entered for this week yet.</div>';
+    return;
+  }
+  var byDivision = {};
+  matchups.forEach(function (m) {
+    var d = m.division || "?";
+    if (!byDivision[d]) byDivision[d] = [];
+    byDivision[d].push(m);
+  });
+  var divisions = Object.keys(byDivision).sort();
+  var html = '<div class="matchup-board">';
+  divisions.forEach(function (d) {
+    html += '<div class="matchup-div-header">Division ' + d + "</div>";
+    byDivision[d].forEach(function (m) {
+      var s1 = m.score1 !== "" ? m.score1 : "-";
+      var s2 = m.score2 !== "" ? m.score2 : "-";
+      html += '<div class="matchup-row">' +
+        '<div class="matchup-team">' + m.team1 + "</div>" +
+        '<div class="matchup-score">' + s1 + " - " + s2 + "</div>" +
+        '<div class="matchup-team right">' + m.team2 + "</div>" +
+        "</div>";
+    });
+  });
+  html += "</div>";
+  el.innerHTML = html;
+}
+
+fetch("schedule.csv?" + Date.now())
+  .then(function (r) { return r.text(); })
+  .then(function (text) {
+    scheduleByWeek = parseScheduleCsv(text);
+    renderWeekTabs();
+    renderSchedule();
+  })
+  .catch(function () {
+    document.getElementById("scheduleContent").innerHTML = '<div class="error">Could not load schedule.csv.</div>';
+  });
+</script>
+</body>
+</html>
