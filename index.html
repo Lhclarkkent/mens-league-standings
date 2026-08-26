@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cornerstone Men's Fantasy Football League</title>
+    <title>Cornerstone Men's Fantasy League</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             /* Palette: Leather Brown, Warm Tan, Slate Blue */
-            --bg-base: #120f0d;         /* Dark Espresso Brown */
-            --bg-surface: #1e1915;      /* Deep Warm Brown Surface */
-            --bg-card: #28211b;         /* Rich Card Background */
+            --bg-base: #120f0d;
+            --bg-surface: #1e1915;
+            --bg-card: #28211b;
             --bg-card-hover: #332a23;
             
-            --blue-accent: #3b82f6;     /* Electric Sports Blue */
+            --blue-accent: #3b82f6;
             --blue-glow: rgba(59, 130, 246, 0.35);
-            --brown-accent: #a65a2a;    /* Leather Brown Accent */
-            --tan-accent: #e2c08d;      /* Warm Sand / Tan */
+            --brown-accent: #a65a2a;
+            --tan-accent: #e2c08d;
             --tan-glow: rgba(226, 192, 141, 0.2);
             
             --text-main: #f8fafc;
@@ -128,6 +128,76 @@
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* TROPHY ROOM */
+        .trophy-section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .trophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .trophy-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transition: transform 0.2s;
+        }
+
+        .trophy-card:hover { transform: translateY(-3px); }
+
+        .trophy-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .trophy-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .trophy-winner {
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        .trophy-reason {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Individual Award Colors */
+        .award-gold .trophy-name { color: var(--tan-accent); }
+        .award-gold { border-top: 4px solid var(--tan-accent); }
+        
+        .award-blue .trophy-name { color: var(--blue-accent); }
+        .award-blue { border-top: 4px solid var(--blue-accent); }
+        
+        .award-brown .trophy-name { color: var(--brown-accent); }
+        .award-brown { border-top: 4px solid var(--brown-accent); }
 
         /* NEWS CARDS */
         .news-container {
@@ -355,6 +425,37 @@
 
     <!-- NEWS & NOTES VIEW -->
     <main id="view-news" class="active-view">
+        
+        <div class="trophy-section-title">
+            🏆 Week 1 Superlatives
+        </div>
+        
+        <div class="trophy-grid">
+            <!-- Award 1: The Juggernaut -->
+            <div class="trophy-card award-gold">
+                <div class="trophy-icon">🔥</div>
+                <div class="trophy-name">The Juggernaut</div>
+                <div class="trophy-winner">Michael Carruthers</div>
+                <div class="trophy-reason">Highest scorer of the week. Dropped an absurd 142.6 points to lead all 36 teams.</div>
+            </div>
+
+            <!-- Award 2: The Heartbreak -->
+            <div class="trophy-card award-blue">
+                <div class="trophy-icon">💔</div>
+                <div class="trophy-name">The Heartbreak</div>
+                <div class="trophy-winner">Chris Burke</div>
+                <div class="trophy-reason">Scored 127.2 points (top 5 in the league) but still took the loss against Will Tetley's 130.5.</div>
+            </div>
+
+            <!-- Award 3: The Snooze Button -->
+            <div class="trophy-card award-brown">
+                <div class="trophy-icon">💤</div>
+                <div class="trophy-name">The Snooze Button</div>
+                <div class="trophy-winner">Jaden Robertson</div>
+                <div class="trophy-reason">Lowest scorer of the week. Must have forgotten to set the lineup with a brutal 90.4 points.</div>
+            </div>
+        </div>
+
         <div class="news-container">
             <div class="news-card">
                 <div class="news-header-row">
