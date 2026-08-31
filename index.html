@@ -460,7 +460,7 @@
             <div class="news-card">
                 <div class="news-header-row">
                     <span class="news-badge">Official Announcement</span>
-                    <span class="news-date">AUGUST 25, 2026</span>
+                    <span class="news-date">AUGUST 31, 2026</span>
                 </div>
                 <h2>Welcome to the 3-Division Era</h2>
                 <p>The 36-team super league structure is officially set! With 3 distinct 12-team divisions, every match counts toward earning a spot in the overall postseason. Commissioners <strong>Richard Graham</strong>, <strong>Troy Graham</strong>, and <strong>Michael Carruthers</strong> are finishing up division prep ahead of draft night.</p>
@@ -488,6 +488,7 @@
         Cornerstone Men's Fantasy Football • Standings update every Tuesday morning.<br><br>
         <!-- The Visitor Counter Badge -->
         <img src="https://komarev.com/ghpvc/?username=lhclarkkent-mens-league&label=PAGE+VIEWS&color=3b82f6&label_color=a65a2a&style=flat" alt="Visitor Count" style="border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    </footer>
 
     <script>
         let rawStandingsData = [];
@@ -572,7 +573,13 @@
                     teams.forEach((t, idx) => {
                         html += `
                         <tr class="${idx === 0 ? 'top-rank' : ''}">
-                            <td><span class="rank-num">${idx + 1}</span><span class="team-name">${t.Team}</span></td>
+                            <td>
+                                <span class="rank-num">${idx + 1}</span>
+                                <div style="display:inline-block; line-height:1.2; vertical-align:middle;">
+                                    <span class="team-name">${t.Team}</span><br>
+                                    <span style="font-size:0.75rem; color:var(--text-muted);">${t.Owner || 'TBA'}</span>
+                                </div>
+                            </td>
                             <td style="text-align:center;" class="record-val">${t.Wins}-${t.Losses}-${t.Ties}</td>
                             <td style="text-align:right;" class="pf-val">${parseFloat(t['Points For']).toFixed(1)}</td>
                         </tr>`;
@@ -605,7 +612,13 @@
                 allTeams.forEach((t, idx) => {
                     html += `
                     <tr class="${idx < 6 ? 'top-rank' : ''}">
-                        <td><span class="rank-num">${idx + 1}</span><span class="team-name">${t.Team}</span></td>
+                        <td>
+                            <span class="rank-num">${idx + 1}</span>
+                            <div style="display:inline-block; line-height:1.2; vertical-align:middle;">
+                                <span class="team-name">${t.Team}</span><br>
+                                <span style="font-size:0.75rem; color:var(--text-muted);">${t.Owner || 'TBA'}</span>
+                            </div>
+                        </td>
                         <td><span class="news-badge" style="font-size:0.65rem;">${t.Division}</span></td>
                         <td style="text-align:center;" class="record-val">${t.Wins}-${t.Losses}-${t.Ties}</td>
                         <td style="text-align:right;" class="pf-val">${parseFloat(t['Points For']).toFixed(1)}</td>
