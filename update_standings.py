@@ -8,9 +8,7 @@ espn_s2 = os.environ.get('ESPN_S2')
 
 # Define your 3 leagues - Replace these IDs with your actual ESPN League IDs!
 league_ids = [
-    {"id": 765952010, "division": "Patriarchs"},
-    {"id": 2222222, "division": "Division 2"},
-    {"id": 3333333, "division": "Division 3"}
+    {"id": 765952010, "division": "Patriarchs"}
 ]
 
 all_teams = []
