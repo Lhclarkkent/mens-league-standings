@@ -7,18 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Palette: Leather Brown, Warm Tan, Slate Blue */
             --bg-base: #120f0d;
             --bg-surface: #1e1915;
             --bg-card: #28211b;
             --bg-card-hover: #332a23;
-            
             --blue-accent: #3b82f6;
             --blue-glow: rgba(59, 130, 246, 0.35);
             --brown-accent: #a65a2a;
             --tan-accent: #e2c08d;
             --tan-glow: rgba(226, 192, 141, 0.2);
-            
             --text-main: #f8fafc;
             --text-muted: #a39585;
             --border: #3d3228;
@@ -40,14 +37,12 @@
                 radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
         }
 
-        /* HEADER & BRANDING */
         header {
             background-color: var(--bg-surface);
             border-bottom: 3px solid var(--brown-accent);
             padding: 2rem 1.5rem 1.5rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             text-align: center;
-            position: relative;
         }
 
         .eyebrow {
@@ -77,11 +72,10 @@
             font-weight: 500;
         }
 
-        /* NAVIGATION TABS */
         .nav-tabs {
             display: flex;
             justify-content: center;
-            gap: 0.75rem;
+            gap: 0.5rem;
             margin-top: 1.5rem;
             flex-wrap: wrap;
         }
@@ -90,11 +84,11 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             color: var(--text-muted);
-            padding: 0.6rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 30px;
             cursor: pointer;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: all 0.25s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -113,7 +107,6 @@
             box-shadow: 0 0 15px var(--blue-glow);
         }
 
-        /* MAIN CONTAINER */
         main {
             flex: 1;
             max-width: 1240px;
@@ -130,7 +123,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* TROPHY ROOM */
         .trophy-section-title {
             font-family: 'Oswald', sans-serif;
             font-size: 1.5rem;
@@ -156,55 +148,22 @@
             padding: 1.5rem;
             border: 1px solid var(--border);
             text-align: center;
-            position: relative;
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            transition: transform 0.2s;
         }
 
-        .trophy-card:hover { transform: translateY(-3px); }
-
-        .trophy-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            display: inline-block;
-        }
-
-        .trophy-name {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.75rem;
-        }
-
-        .trophy-winner {
-            font-weight: 800;
-            font-size: 1.15rem;
-            color: var(--text-main);
-            margin-bottom: 0.25rem;
-        }
-
-        .trophy-reason {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
+        .trophy-icon { font-size: 2.5rem; margin-bottom: 0.5rem; display: inline-block; }
+        .trophy-name { font-family: 'Oswald', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; }
+        .trophy-winner { font-weight: 800; font-size: 1.15rem; color: var(--text-main); margin-bottom: 0.25rem; }
+        .trophy-reason { font-size: 0.9rem; color: var(--text-muted); line-height: 1.4; }
 
         .award-gold .trophy-name { color: var(--tan-accent); }
         .award-gold { border-top: 4px solid var(--tan-accent); }
-        
         .award-blue .trophy-name { color: var(--blue-accent); }
         .award-blue { border-top: 4px solid var(--blue-accent); }
-        
         .award-brown .trophy-name { color: var(--brown-accent); }
         .award-brown { border-top: 4px solid var(--brown-accent); }
 
-        /* NEWS CARDS */
-        .news-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
+        .news-container { display: flex; flex-direction: column; gap: 1.5rem; }
         
         .news-card {
             background: var(--bg-surface);
@@ -234,28 +193,10 @@
             letter-spacing: 1px;
         }
 
-        .news-date { 
-            color: var(--tan-accent); 
-            font-family: 'Oswald', sans-serif; 
-            font-size: 0.95rem; 
-            letter-spacing: 1px;
-        }
+        .news-date { color: var(--tan-accent); font-family: 'Oswald', sans-serif; font-size: 0.95rem; letter-spacing: 1px; }
+        .news-card h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; margin: 0 0 1rem 0; color: var(--text-main); }
+        .news-card p { line-height: 1.7; color: #d1c7bc; font-size: 1.05rem; margin-bottom: 1rem; }
 
-        .news-card h2 { 
-            font-family: 'Oswald', sans-serif; 
-            font-size: 1.8rem; 
-            margin: 0 0 1rem 0; 
-            color: var(--text-main);
-        }
-
-        .news-card p { 
-            line-height: 1.7; 
-            color: #d1c7bc; 
-            font-size: 1.05rem; 
-            margin-bottom: 1rem;
-        }
-
-        /* STANDINGS CONTROLS */
         .view-toggle-bar {
             display: flex;
             justify-content: space-between;
@@ -269,18 +210,8 @@
             border: 1px solid var(--border);
         }
 
-        .toggle-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.2rem;
-            color: var(--tan-accent);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .toggle-buttons {
-            display: flex;
-            gap: 0.5rem;
-        }
+        .toggle-title { font-family: 'Oswald', sans-serif; font-size: 1.2rem; color: var(--tan-accent); text-transform: uppercase; letter-spacing: 1px; }
+        .toggle-buttons { display: flex; gap: 0.5rem; }
 
         .toggle-btn {
             background: var(--bg-card);
@@ -294,13 +225,8 @@
             transition: all 0.2s;
         }
 
-        .toggle-btn.active {
-            background: var(--brown-accent);
-            color: #fff;
-            border-color: var(--brown-accent);
-        }
+        .toggle-btn.active { background: var(--brown-accent); color: #fff; border-color: var(--brown-accent); }
 
-        /* STANDINGS GRID & TABLES */
         .standings-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -313,6 +239,7 @@
             overflow: hidden;
             border: 1px solid var(--border);
             box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+            margin-bottom: 2rem;
         }
 
         .div-header {
@@ -388,7 +315,6 @@
         .pf-val { color: var(--tan-accent); font-family: 'Oswald', sans-serif; font-size: 1.1rem; }
         .record-val { color: #cbd5e1; font-family: monospace; font-size: 0.95rem; }
 
-        /* ESP1 Direct Links Container */
         .espn-links {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -400,7 +326,7 @@
             background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 1.25rem;
+            padding: 1.5rem;
             text-align: center;
         }
 
@@ -409,6 +335,7 @@
             color: var(--tan-accent);
             margin: 0 0 0.5rem 0;
             letter-spacing: 0.5px;
+            font-size: 1.3rem;
         }
 
         .espn-btn {
@@ -416,11 +343,11 @@
             background: var(--blue-accent);
             color: white;
             text-decoration: none;
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1.25rem;
             border-radius: 6px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            margin-top: 0.5rem;
+            margin-top: 0.75rem;
             transition: background 0.2s;
         }
 
@@ -447,7 +374,8 @@
         <div class="nav-tabs">
             <button class="nav-btn active" onclick="switchTab('news')">News & Notes</button>
             <button class="nav-btn" onclick="switchTab('standings')">Global Standings</button>
-            <button class="nav-btn" onclick="switchTab('recap')">Draft Recap & Hubs</button>
+            <button class="nav-btn" onclick="switchTab('recap')">Draft Recap</button>
+            <button class="nav-btn" onclick="switchTab('hubs')">League Hubs</button>
         </div>
     </header>
 
@@ -459,8 +387,8 @@
             <div class="trophy-card award-gold">
                 <div class="trophy-icon">🔥</div>
                 <div class="trophy-name">The Juggernaut</div>
-                <div class="trophy-winner">Faith Fighters / Apostles Top Scorers</div>
-                <div class="trophy-reason">All 36 teams are locked in following tonight's drafts across the church. Let the battles begin!</div>
+                <div class="trophy-winner">Faith Fighters / Apostles / Patriarchs</div>
+                <div class="trophy-reason">All 36 teams are locked in following the drafts at the church. Let the battles begin!</div>
             </div>
 
             <div class="trophy-card award-blue">
@@ -485,8 +413,8 @@
                     <span class="news-date">SEPTEMBER 3, 2026</span>
                 </div>
                 <h2>All Three Division Drafts Complete!</h2>
-                <p>The pre-down potluck and draft night at the church were a massive success. Across the <strong>Faith Fighters</strong>, <strong>Apostles</strong>, and <strong>Patriarchs</strong> divisions, 36 managers successfully built out their rosters. Commissioners are locking down lineups for Week 1 kickoff.</p>
-                <p>Use the navigation tabs above to check out the **Global Standings** or jump directly into the **ESPN League Hubs** via the Draft Recap tab.</p>
+                <p>The pre-draft potluck and draft night at the church were a massive success. Across the <strong>Faith Fighters</strong>, <strong>Apostles</strong>, and <strong>Patriarchs</strong> divisions, 36 managers successfully built out their rosters. Commissioners are locking down lineups for Week 1 kickoff.</p>
+                <p>Use the navigation tabs above to check out the **Global Standings**, review the **Draft Recap**, or access the **League Hubs**.</p>
             </div>
         </div>
     </main>
@@ -506,39 +434,57 @@
         </div>
     </main>
 
-    <!-- DRAFT RECAP & LEAGUE HUBS VIEW -->
+    <!-- DRAFT RECAP VIEW -->
     <main id="view-recap">
         <div class="view-toggle-bar">
-            <div class="toggle-title">ESPN Public League Links & Draft Comparisons</div>
+            <div class="toggle-title">Draft Recap & Division Comparison</div>
+        </div>
+
+        <div class="news-container">
+            <div class="news-card">
+                <div class="news-header-row">
+                    <span class="news-badge">Cross-Division Breakdown</span>
+                    <span class="news-date">ROUND 1-3 ANALYSIS</span>
+                </div>
+                <h2>Draft Night Analysis & Team Grades</h2>
+                <p>In a massive 36-team super league split across three 12-team rooms (Faith Fighters, Apostles, and Patriarchs), draft strategy shifted heavily toward securing elite quarterback floors and bell-cow running backs early before talent evaporated.</p>
+                
+                <h3 style="color: var(--tan-accent); margin-top: 1.5rem;">Faith Fighters Division Recap</h3>
+                <p><strong>Round 1 Highlights:</strong> Drake's Daring Team kicked off the draft by grabbing Josh Allen (BUF, QB), while Cohen's Team went with Jayden Daniels (WSH, QB) and Dart Knights secured Bijan Robinson (ATL, RB). Later in the first, Jesus Wept grabbed Jahmyr Gibbs and Turned Up Tunics landed Christian McCaffrey.</p>
+                <p><strong>Grade & Commentary:</strong> <em>Grade: A</em>. Managers in Faith Fighters prioritized elite dual-threat quarterbacks early, locking down positional advantages before positional runs dried up.</p>
+
+                <h3 style="color: var(--tan-accent); margin-top: 1.5rem;">Apostles Division Recap</h3>
+                <p><strong>Round 1 Highlights:</strong> Kyle's Top-Notch Team kicked off the room with Jahmyr Gibbs (DET, RB), followed by The Promised Loveland taking Josh Allen (BUF, QB) and Tatooine Tuskens selecting Lamar Jackson (BAL, QB). Heavy hitters like Bijan Robinson and Ja'Marr Chase flew off the board immediately.</p>
+                <p><strong>Grade & Commentary:</strong> <em>Grade: A-</em>. Excellent balance of elite rushing floors and high-upside wide receiver anchors in rounds 2 and 3.</p>
+
+                <h3 style="color: var(--tan-accent); margin-top: 1.5rem;">Patriarchs Division Recap</h3>
+                <p><strong>Round 1 Highlights:</strong> Braxton's Beastly Team started strong with Jahmyr Gibbs (DET, RB), Armor Bearers secured Josh Allen (BUF, QB), and Blitzburg snagged Bijan Robinson (ATL, RB). Elite quarterback runs defined the top of this room as well.</p>
+                <p><strong>Grade & Commentary:</strong> <em>Grade: A</em>. Highly aggressive early-round drafting with phenomenal value snags in rounds 2 and 3.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- LEAGUE HUBS VIEW -->
+    <main id="view-hubs">
+        <div class="view-toggle-bar">
+            <div class="toggle-title">ESPN Public League Hubs</div>
         </div>
 
         <div class="espn-links">
             <div class="espn-card">
                 <h3>Faith Fighters</h3>
                 <p style="font-size: 0.85rem; color: var(--text-muted);">Division 1 Public Hub</p>
-                <a href="https://fantasy.espn.com/football/league?leagueId=115119444" target="_blank" class="espn-btn">Open ESPN Hub</a>
+                <a href="https://fantasy.espn.com/football/league?leagueId=115119444" target="_blank" class="espn-btn">Open Faith Fighters</a>
             </div>
             <div class="espn-card">
                 <h3>Apostles</h3>
                 <p style="font-size: 0.85rem; color: var(--text-muted);">Division 2 Public Hub</p>
-                <a href="https://fantasy.espn.com/football/league?leagueId=929898854" target="_blank" class="espn-btn">Open ESPN Hub</a>
+                <a href="https://fantasy.espn.com/football/league?leagueId=929898854" target="_blank" class="espn-btn">Open Apostles</a>
             </div>
             <div class="espn-card">
                 <h3>Patriarchs</h3>
                 <p style="font-size: 0.85rem; color: var(--text-muted);">Division 3 Public Hub</p>
-                <a href="https://fantasy.espn.com/football/league?leagueId=765952010" target="_blank" class="espn-btn">Open ESPN Hub</a>
-            </div>
-        </div>
-
-        <div class="news-container">
-            <div class="news-card">
-                <div class="news-header-row">
-                    <span class="news-badge">Draft Summary</span>
-                    <span class="news-date">SUPER LEAGUE RECAP</span>
-                </div>
-                <h2>Cross-Division Analysis</h2>
-                <p>With three 12-team leagues running in parallel, elite quarterbacks like Josh Allen and dual-threat running backs like Jahmyr Gibbs and Bijan Robinson dominated the early first-round draft capital across all three rooms. Scarcity kicked in heavily by round 4, forcing managers to hunt for high-upside rookies and depth handcuffs.</p>
-                <p>Check the individual ESPN links above to review specific rosters, track weekly matchups, and monitor your division's scoreboard live!</p>
+                <a href="https://fantasy.espn.com/football/league?leagueId=765952010" target="_blank" class="espn-btn">Open Patriarchs</a>
             </div>
         </div>
     </main>
@@ -595,7 +541,7 @@
         function renderStandings() {
             const container = document.getElementById('standingsContent');
             if (!rawStandingsData.length) {
-                container.innerHTML = '<p style="text-align:center; color: var::text-muted;">No standings data found in standings.csv.</p>';
+                container.innerHTML = '<p style="text-align:center; color: var(--text-muted);">No standings data found in standings.csv.</p>';
                 return;
             }
 
