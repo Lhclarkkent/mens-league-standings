@@ -83,17 +83,18 @@
             justify-content: center;
             gap: 0.75rem;
             margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .nav-btn {
             background: var(--bg-card);
             border: 1px solid var(--border);
             color: var(--text-muted);
-            padding: 0.6rem 1.8rem;
+            padding: 0.6rem 1.5rem;
             border-radius: 30px;
             cursor: pointer;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: all 0.25s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -189,7 +190,6 @@
             line-height: 1.4;
         }
 
-        /* Individual Award Colors */
         .award-gold .trophy-name { color: var(--tan-accent); }
         .award-gold { border-top: 4px solid var(--tan-accent); }
         
@@ -213,11 +213,6 @@
             border: 1px solid var(--border);
             border-left: 6px solid var(--brown-accent);
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
-        }
-
-        .news-card:hover {
-            transform: translateY(-2px);
         }
 
         .news-header-row {
@@ -251,7 +246,6 @@
             font-size: 1.8rem; 
             margin: 0 0 1rem 0; 
             color: var(--text-main);
-            letter-spacing: 0.5px;
         }
 
         .news-card p { 
@@ -260,7 +254,6 @@
             font-size: 1.05rem; 
             margin-bottom: 1rem;
         }
-        .news-card p:last-child { margin-bottom: 0; }
 
         /* STANDINGS CONTROLS */
         .view-toggle-bar {
@@ -324,19 +317,16 @@
 
         .div-header {
             background: linear-gradient(180deg, var(--bg-card), var(--bg-surface));
-            padding: 1.2rem 1rem;
+            padding: 1.2rem 1.5rem;
             font-family: 'Oswald', sans-serif;
             font-size: 1.4rem;
             text-transform: uppercase;
-            text-align: center;
             color: var(--tan-accent);
             border-bottom: 2px solid var(--brown-accent);
             letter-spacing: 1.5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
         }
 
         .div-tag {
@@ -398,7 +388,44 @@
         .pf-val { color: var(--tan-accent); font-family: 'Oswald', sans-serif; font-size: 1.1rem; }
         .record-val { color: #cbd5e1; font-family: monospace; font-size: 0.95rem; }
 
-        /* FOOTER */
+        /* ESP1 Direct Links Container */
+        .espn-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .espn-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .espn-card h3 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--tan-accent);
+            margin: 0 0 0.5rem 0;
+            letter-spacing: 0.5px;
+        }
+
+        .espn-btn {
+            display: inline-block;
+            background: var(--blue-accent);
+            color: white;
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .espn-btn:hover { background: #1d4ed8; }
+
         footer {
             text-align: center;
             padding: 2rem;
@@ -420,51 +447,46 @@
         <div class="nav-tabs">
             <button class="nav-btn active" onclick="switchTab('news')">News & Notes</button>
             <button class="nav-btn" onclick="switchTab('standings')">Global Standings</button>
+            <button class="nav-btn" onclick="switchTab('recap')">Draft Recap & Hubs</button>
         </div>
     </header>
 
     <!-- NEWS & NOTES VIEW -->
     <main id="view-news" class="active-view">
-        
-        <div class="trophy-section-title">
-            🏆 Week 1 Superlatives
-        </div>
+        <div class="trophy-section-title">🏆 Opening Week Superlatives</div>
         
         <div class="trophy-grid">
-            <!-- Award 1: The Juggernaut -->
             <div class="trophy-card award-gold">
                 <div class="trophy-icon">🔥</div>
                 <div class="trophy-name">The Juggernaut</div>
-                <div class="trophy-winner">Michael Carruthers</div>
-                <div class="trophy-reason">Highest scorer of the week. Dropped an absurd 142.6 points to lead all 36 teams.</div>
+                <div class="trophy-winner">Faith Fighters / Apostles Top Scorers</div>
+                <div class="trophy-reason">All 36 teams are locked in following tonight's drafts across the church. Let the battles begin!</div>
             </div>
 
-            <!-- Award 2: The Heartbreak -->
             <div class="trophy-card award-blue">
-                <div class="trophy-icon">💔</div>
-                <div class="trophy-name">The Heartbreak</div>
-                <div class="trophy-winner">Chris Burke</div>
-                <div class="trophy-reason">Scored 127.2 points (top 5 in the league) but still took the loss against Will Tetley's 130.5.</div>
+                <div class="trophy-icon">⚡</div>
+                <div class="trophy-name">Draft Night Royalty</div>
+                <div class="trophy-winner">3 Divisions Complete</div>
+                <div class="trophy-reason">Faith Fighters, Apostles, and Patriarchs have officially completed their draft boards.</div>
             </div>
 
-            <!-- Award 3: The Snooze Button -->
             <div class="trophy-card award-brown">
-                <div class="trophy-icon">💤</div>
-                <div class="trophy-name">The Snooze Button</div>
-                <div class="trophy-winner">Jaden Robertson</div>
-                <div class="trophy-reason">Lowest scorer of the week. Must have forgotten to set the lineup with a brutal 90.4 points.</div>
+                <div class="trophy-icon">🎯</div>
+                <div class="trophy-name">The Scarcity Test</div>
+                <div class="trophy-winner">Super League Era</div>
+                <div class="trophy-reason">Navigating a 36-team draft pool tested every manager's depth drafting strategy.</div>
             </div>
         </div>
 
         <div class="news-container">
             <div class="news-card">
                 <div class="news-header-row">
-                    <span class="news-badge">Official Announcement</span>
-                    <span class="news-date">AUGUST 31, 2026</span>
+                    <span class="news-badge">Draft Night Success</span>
+                    <span class="news-date">SEPTEMBER 3, 2026</span>
                 </div>
-                <h2>Welcome to the 3-Division Era</h2>
-                <p>The 36-team super league structure is officially set! With 3 distinct 12-team divisions, every match counts toward earning a spot in the overall postseason. Commissioners <strong>Richard Graham</strong>, <strong>Troy Graham</strong>, and <strong>Michael Carruthers</strong> are finishing up division prep ahead of draft night.</p>
-                <p><strong>Draft Night Details:</strong> Mark your calendars for <strong>Thursday, September 3rd at 6:30 PM</strong> at the church. We will have a pre-draft mini-potluck starting at 5:30 PM—come early, grab food, and talk trash before we lock in.</p>
+                <h2>All Three Division Drafts Complete!</h2>
+                <p>The pre-down potluck and draft night at the church were a massive success. Across the <strong>Faith Fighters</strong>, <strong>Apostles</strong>, and <strong>Patriarchs</strong> divisions, 36 managers successfully built out their rosters. Commissioners are locking down lineups for Week 1 kickoff.</p>
+                <p>Use the navigation tabs above to check out the **Global Standings** or jump directly into the **ESPN League Hubs** via the Draft Recap tab.</p>
             </div>
         </div>
     </main>
@@ -484,15 +506,51 @@
         </div>
     </main>
 
+    <!-- DRAFT RECAP & LEAGUE HUBS VIEW -->
+    <main id="view-recap">
+        <div class="view-toggle-bar">
+            <div class="toggle-title">ESPN Public League Links & Draft Comparisons</div>
+        </div>
+
+        <div class="espn-links">
+            <div class="espn-card">
+                <h3>Faith Fighters</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Division 1 Public Hub</p>
+                <a href="https://fantasy.espn.com/football/league?leagueId=115119444" target="_blank" class="espn-btn">Open ESPN Hub</a>
+            </div>
+            <div class="espn-card">
+                <h3>Apostles</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Division 2 Public Hub</p>
+                <a href="https://fantasy.espn.com/football/league?leagueId=929898854" target="_blank" class="espn-btn">Open ESPN Hub</a>
+            </div>
+            <div class="espn-card">
+                <h3>Patriarchs</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Division 3 Public Hub</p>
+                <a href="https://fantasy.espn.com/football/league?leagueId=765952010" target="_blank" class="espn-btn">Open ESPN Hub</a>
+            </div>
+        </div>
+
+        <div class="news-container">
+            <div class="news-card">
+                <div class="news-header-row">
+                    <span class="news-badge">Draft Summary</span>
+                    <span class="news-date">SUPER LEAGUE RECAP</span>
+                </div>
+                <h2>Cross-Division Analysis</h2>
+                <p>With three 12-team leagues running in parallel, elite quarterbacks like Josh Allen and dual-threat running backs like Jahmyr Gibbs and Bijan Robinson dominated the early first-round draft capital across all three rooms. Scarcity kicked in heavily by round 4, forcing managers to hunt for high-upside rookies and depth handcuffs.</p>
+                <p>Check the individual ESPN links above to review specific rosters, track weekly matchups, and monitor your division's scoreboard live!</p>
+            </div>
+        </div>
+    </main>
+
     <footer>
         Cornerstone Men's Fantasy Football • Standings update every Tuesday morning.<br><br>
-        <!-- The Visitor Counter Badge -->
         <img src="https://komarev.com/ghpvc/?username=lhclarkkent-mens-league&label=PAGE+VIEWS&color=3b82f6&label_color=a65a2a&style=flat" alt="Visitor Count" style="border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
     </footer>
 
     <script>
         let rawStandingsData = [];
-        let standingsMode = 'div'; // 'div' or 'overall'
+        let standingsMode = 'div';
 
         function switchTab(tabId) {
             document.querySelectorAll('main').forEach(el => el.classList.remove('active-view'));
@@ -537,11 +595,10 @@
         function renderStandings() {
             const container = document.getElementById('standingsContent');
             if (!rawStandingsData.length) {
-                container.innerHTML = '<p style="text-align:center; color: var(--text-muted);">No standings data found in standings.csv.</p>';
+                container.innerHTML = '<p style="text-align:center; color: var::text-muted;">No standings data found in standings.csv.</p>';
                 return;
             }
 
-            // Helper to sort teams by Wins desc, then Points For desc
             const sortFn = (a, b) => {
                 const wA = parseInt(a.Wins) || 0;
                 const wB = parseInt(b.Wins) || 0;
@@ -551,7 +608,6 @@
             };
 
             if (standingsMode === 'div') {
-                // DIVISIONAL VIEW
                 const divisions = [...new Set(rawStandingsData.map(d => d.Division))];
                 let html = '<div class="standings-grid">';
                 
@@ -590,7 +646,6 @@
                 container.innerHTML = html;
 
             } else {
-                // OVERALL 36-TEAM LEADERBOARD VIEW
                 const allTeams = [...rawStandingsData].sort(sortFn);
                 let html = `
                 <div class="division-card" style="max-width: 900px; margin: 0 auto;">
