@@ -384,6 +384,7 @@
             <button class="nav-btn active" onclick="switchTab('news')">News & Notes</button>
             <button class="nav-btn" onclick="switchTab('standings')">Global Standings</button>
             <button class="nav-btn" onclick="switchTab('recap')">Draft Recap</button>
+            <button class="nav-btn" onclick="switchTab('playoffs')">Playoffs & Runoff</button>
             <button class="nav-btn" onclick="switchTab('hubs')">League Hubs</button>
         </div>
     </header>
@@ -423,7 +424,7 @@
                 </div>
                 <h2>All Three Division Drafts Complete!</h2>
                 <p>The pre-draft potluck and draft night at the church were a massive success. Across the <strong>Faith Fighters</strong>, <strong>Apostles</strong>, and <strong>Patriarchs</strong> divisions, 36 managers successfully built out their rosters. Commissioners are locking down lineups for Week 1 kickoff.</p>
-                <p>Use the navigation tabs above to check out the **Global Standings**, review the **Draft Recap**, or access the **League Hubs**.</p>
+                <p>Use the navigation tabs above to check out the **Global Standings**, review the **Draft Recap**, monitor the **Playoffs**, or access the **League Hubs**.</p>
             </div>
         </div>
     </main>
@@ -616,6 +617,104 @@
                 </ol>
 
                 <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);"><strong>Positional Breakdown (Rds 1–3):</strong> 12 QBs, 12 RBs, 10 WRs, 2 TEs, 0 Kickers, 0 Defenses</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- PLAYOFFS & RUNOFF VIEW -->
+    <main id="view-playoffs">
+        <div class="view-toggle-bar">
+            <div class="toggle-title">Postseason Command Hub (Weeks 16 & 17)</div>
+        </div>
+
+        <div class="news-container">
+            <!-- CHAMPIONSHIP BRACKET -->
+            <div class="news-card">
+                <div class="news-header-row"><span class="news-badge">Championship Race</span><span class="news-date">TOP 4 PER DIVISION</span></div>
+                <h2>Global Championship Bracket (Weeks 16 & 17 Total Points)</h2>
+                <p>The top 4 teams from each of the three divisions advance to the postseason. Because teams are split across separate ESPN leagues, the championship is decided by total points scored across Weeks 16 and 17 (Manual Tracking).</p>
+                
+                <div class="division-card" style="margin-top: 1.5rem;">
+                    <div class="div-header">
+                        <span>Championship Contenders Standings</span>
+                        <span class="div-tag">Placeholder</span>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Seed & Team</th>
+                                <th>Division</th>
+                                <th style="text-align:center;">Wk 16 Pts</th>
+                                <th style="text-align:center;">Wk 17 Pts</th>
+                                <th style="text-align:right;">Total Postseason Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="rank-num">1</span> <span class="team-name">TBD (Seed 1)</span><br><span style="font-size:0.75rem; color:var(--text-muted);">Manager Name</span></td>
+                                <td><span class="news-badge" style="font-size:0.65rem;">Division</span></td>
+                                <td style="text-align:center;" class="record-val">0.0</td>
+                                <td style="text-align:center;" class="record-val">0.0</td>
+                                <td style="text-align:right;" class="pf-val">0.0</td>
+                            </tr>
+                            <tr>
+                                <td><span class="rank-num">2</span> <span class="team-name">TBD (Seed 2)</span><br><span style="font-size:0.75rem; color:var(--text-muted);">Manager Name</span></td>
+                                <td><span class="news-badge" style="font-size:0.65rem;">Division</span></td>
+                                <td style="text-align:center;" class="record-val">0.0</td>
+                                <td style="text-align:center;" class="record-val">0.0</td>
+                                <td style="text-align:right;" class="pf-val">0.0</td>
+                            </tr>
+                            <tr>
+                                <td><span class="rank-num">3</span> <span class="team-name">TBD (Seed 3)</span><br><span style="font-size:0.75rem; color:var(--text-muted);">Manager Name</span></td>
+                                <td><span class="news-badge" style="font-size:0.65rem;">Division</span></td>
+                                <td style="text-align:center;" class="record-val">0.0</td>
+                                <td style="text-align:center;" class="record-val">0.0</td>
+                                <td style="text-align:right;" class="pf-val">0.0</td>
+                            </tr>
+                            <tr>
+                                <td><span class="rank-num">4</span> <span class="team-name">TBD (Seed 4)</span><br><span style="font-size:0.75rem; color:var(--text-muted);">Manager Name</span></td>
+                                <td><span class="news-badge" style="font-size:0.65rem;">Division</span></td>
+                                <td style="text-align:center;" class="record-val">0.0</td>
+                                <td style="text-align:center;" class="record-val">0.0</td>
+                                <td style="text-align:right;" class="pf-val">0.0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CONSOLATION RUNOFF -->
+            <div class="news-card">
+                <div class="news-header-row"><span class="news-badge">Consolation Runoff</span><span class="news-date">WEEKS 16 & 17</span></div>
+                <h2>Consolation Total Points Runoff</h2>
+                <p>For all teams outside the top 4 playoff spots in their respective divisions. Compete against the entire super league based on most points scored across Weeks 16 and 17.</p>
+                
+                <div class="division-card" style="margin-top: 1.5rem;">
+                    <div class="div-header">
+                        <span>Runoff Leaderboard</span>
+                        <span class="div-tag">Placeholder</span>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rank & Team</th>
+                                <th>Division</th>
+                                <th style="text-align:center;">Wk 16 Pts</th>
+                                <th style="text-align:center;">Wk 17 Pts</th>
+                                <th style="text-align:right;">Total Runoff Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="rank-num">1</span> <span class="team-name">TBD Team</span><br><span style="font-size:0.75rem; color:var(--text-muted);">Manager Name</span></td>
+                                <td><span class="news-badge" style="font-size:0.65rem;">Division</span></td>
+                                <td style="text-align:center;" class="record-val">0.0</td>
+                                <td style="text-align:center;" class="record-val">0.0</td>
+                                <td style="text-align:right;" class="pf-val">0.0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </main>
