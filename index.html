@@ -383,6 +383,7 @@
         <div class="nav-tabs">
             <button class="nav-btn active" onclick="switchTab('news')">News & Notes</button>
             <button class="nav-btn" onclick="switchTab('standings')">Global Standings</button>
+            <button class="nav-btn" onclick="switchTab('power')">Power Rankings</button>
             <button class="nav-btn" onclick="switchTab('recap')">Draft Recap</button>
             <button class="nav-btn" onclick="switchTab('playoffs')">Playoffs & Runoff</button>
             <button class="nav-btn" onclick="switchTab('hubs')">League Hubs</button>
@@ -424,7 +425,7 @@
                 </div>
                 <h2>The 36-Team Super League is Underway!</h2>
                 <p>Week 1 is officially in the books, and the battle for the postseason has begun. <strong>Taylor Park Boys</strong> set the gold standard with 175.0 points, while <strong>The Promised Loveland</strong> (168.0) and <strong>Bearly Average</strong> (154.5) put their respective divisions on notice.</p>
-                <p>Check out the division scoreboards below, or use the navigation tabs above to view the updated <strong>Global Standings</strong> and <strong>Playoffs & Runoff</strong> placeholders.</p>
+                <p>Check out the division scoreboards below, or use the navigation tabs above to view the updated <strong>Global Standings</strong>, <strong>Power Rankings</strong>, and <strong>Playoffs & Runoff</strong> placeholders.</p>
             </div>
             
             <div class="trophy-section-title" style="margin-top: 1rem;">🏈 Week 1 Scoreboards</div>
@@ -619,6 +620,20 @@
 
         <div id="standingsContent">
             <!-- Dynamic Standings Injected Here -->
+        </div>
+    </main>
+
+    <!-- POWER RANKINGS VIEW -->
+    <main id="view-power">
+        <div class="view-toggle-bar">
+            <div class="toggle-title">Super League Power Rankings</div>
+            <div class="toggle-buttons">
+                <span style="font-size: 0.85rem; color: var(--text-muted); align-self: center;">Weighted by Record & Scoring Efficiency</span>
+            </div>
+        </div>
+
+        <div id="powerContent">
+            <!-- Dynamic Power Rankings Injected Here -->
         </div>
     </main>
 
@@ -937,6 +952,9 @@
             
             document.getElementById(`view-${tabId}`).classList.add('active-view');
             event.target.classList.add('active');
+            if (tabId === 'power') {
+                renderPowerRankings();
+            }
         }
 
         function setStandingsMode(mode) {
@@ -975,6 +993,7 @@
                 if (res.ok) {
                     rawStandingsData = parseCSV(await res.text());
                     renderStandings();
+                    renderPowerRankings();
                 }
             } catch (err) {
                 console.error("Error loading standings.csv:", err);
@@ -1072,6 +1091,62 @@
                 html += `</tbody></table></div>`;
                 container.innerHTML = html;
             }
+        }
+
+        function renderPowerRankings() {
+            const container = document.getElementById('powerContent');
+            if (!rawStandingsData.length) {
+                container.innerHTML = '<p style="text-align:center; color: var(--text-muted);">No data available for power rankings.</p>';
+                return;
+            }
+
+            // Power Score Formula: (Wins * 10) + Points For
+            const scoredTeams = rawStandingsData.map(t => {
+                const wins = parseInt(t.Wins) || 0;
+                const pf = parseFloat(t['Points For']) || 0;
+                const powerScore = (wins * 10) + pf;
+                return { ...t, powerScore };
+            });
+
+            scoredTeams.sort((a, b) => b.powerScore - a.powerScore);
+
+            let html = `
+            <div class="division-card" style="max-width: 900px; margin: 0 auto;">
+                <div class="div-header">
+                    <span>Power Rankings Leaderboard</span>
+                    <span class="div-tag">Top 36 Power Rating</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Power Rank & Team</th>
+                            <th>Division</th>
+                            <th style="text-align:center;">W-L-T</th>
+                            <th style="text-align:center;">Points For</th>
+                            <th style="text-align:right;">Power Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+            scoredTeams.forEach((t, idx) => {
+                html += `
+                <tr class="${idx < 3 ? 'top-rank' : ''}">
+                    <td>
+                        <span class="rank-num">${idx + 1}</span>
+                        <div style="display:inline-block; line-height:1.2; vertical-align:middle;">
+                            <span class="team-name">${t.Team}</span><br>
+                            <span style="font-size:0.75rem; color:var(--text-muted);">${t.Owner || 'TBA'}</span>
+                        </div>
+                    </td>
+                    <td><span class="news-badge" style="font-size:0.65rem;">${t.Division}</span></td>
+                    <td style="text-align:center;" class="record-val">${t.Wins}-${t.Losses}-${t.Ties}</td>
+                    <td style="text-align:center;" class="pf-val" style="font-size:0.95rem;">${parseFloat(t['Points For']).toFixed(1)}</td>
+                    <td style="text-align:right;" class="pf-val">${t.powerScore.toFixed(1)}</td>
+                </tr>`;
+            });
+
+            html += `</tbody></table></div>`;
+            container.innerHTML = html;
         }
 
         loadData();
