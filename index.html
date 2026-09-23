@@ -146,7 +146,7 @@
         
         .trophy-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2.5rem;
         }
@@ -160,10 +160,10 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
         }
 
-        .trophy-icon { font-size: 2.5rem; margin-bottom: 0.5rem; display: inline-block; }
-        .trophy-name { font-family: 'Oswald', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; }
-        .trophy-winner { font-weight: 800; font-size: 1.15rem; color: var(--text-main); margin-bottom: 0.25rem; }
-        .trophy-reason { font-size: 0.9rem; color: var(--text-muted); line-height: 1.4; }
+        .trophy-icon { font-size: 2.2rem; margin-bottom: 0.5rem; display: inline-block; }
+        .trophy-name { font-family: 'Oswald', sans-serif; font-size: 1.15rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .trophy-winner { font-weight: 800; font-size: 1.05rem; color: var(--text-main); margin-bottom: 0.25rem; }
+        .trophy-reason { font-size: 0.88rem; color: var(--text-muted); line-height: 1.4; }
 
         .award-gold .trophy-name { color: var(--tan-accent); }
         .award-gold { border-top: 4px solid var(--tan-accent); }
@@ -392,28 +392,49 @@
 
     <!-- NEWS & NOTES VIEW -->
     <main id="view-news" class="active-view">
-        <div class="trophy-section-title">🏆 Week 2 Superlatives</div>
+        <div class="trophy-section-title">🏆 Week 2 Game Spotlights & Superlatives</div>
         
         <div class="trophy-grid">
             <div class="trophy-card award-gold">
                 <div class="trophy-icon">🔥</div>
-                <div class="trophy-name">The Juggernaut</div>
-                <div class="trophy-winner">Dart Vader (David Fletcher)</div>
-                <div class="trophy-reason">Exploded for a massive 185.0 points in the Patriarchs division, putting on a clinic and claiming the highest weekly score across the entire 36-team league.</div>
+                <div class="trophy-name">The Offensive Masterclass</div>
+                <div class="trophy-winner">Dart Vader (2-0) vs. Cowbout Dem Howboys (1-1)</div>
+                <div class="trophy-reason">Dart Vader put on a masterclass in the Patriarchs division, crushing the competition with a massive <strong>185.0 to 114.5</strong> victory.</div>
             </div>
 
             <div class="trophy-card award-blue">
-                <div class="trophy-icon">😅</div>
-                <div class="trophy-name">The Nail-Biter</div>
-                <div class="trophy-winner">Play for Keeps (Nick Martin) vs. Maye the Force Be with You (Calen McGinty)</div>
-                <div class="trophy-reason">A brutal week for Play for Keeps running into Calen's 122.5 output, while other tight battles went down to the wire across the divisions.</div>
+                <div class="trophy-icon">💥</div>
+                <div class="trophy-name">The One-Sided Blowout</div>
+                <div class="trophy-winner">Watt's the Score (1-1) vs. Blitzburg (1-1)</div>
+                <div class="trophy-reason">Ryker's squad completely ran away with it, dismantling Blitzburg in a dominant <strong>178.0 to 76.5</strong> routing.</div>
             </div>
 
             <div class="trophy-card award-brown">
-                <div class="trophy-icon">💔</div>
-                <div class="trophy-name">Toughest Break</div>
-                <div class="trophy-winner">The Dart Knight (Morgan Jones)</div>
-                <div class="trophy-reason">Put up a strong 130.5 points in Faith Fighters but ran into Cohen's Team or suffered a tough divisional matchup loss.</div>
+                <div class="trophy-icon">⚡</div>
+                <div class="trophy-name">The Statement Rout</div>
+                <div class="trophy-winner">Ben There, Won That (2-0) vs. The Batch Squad (0-2)</div>
+                <div class="trophy-reason">Ben flexed unblemished championship muscle in the Apostles division, cruising to a dominant <strong>169.0 to 110.5</strong> statement win.</div>
+            </div>
+
+            <div class="trophy-card award-gold">
+                <div class="trophy-icon">💪</div>
+                <div class="trophy-name">The Heavyweight Slugfest</div>
+                <div class="trophy-winner">Braxton's Beastly Team (1-1) vs. Bohemian Nixsody (1-1)</div>
+                <div class="trophy-reason">A high-voltage battle where Braxton outpaced Chris <strong>164.5 to 119.0</strong> in a true heavyweight clash.</div>
+            </div>
+
+            <div class="trophy-card award-blue">
+                <div class="trophy-icon">🎯</div>
+                <div class="trophy-name">The Clinical Execution</div>
+                <div class="trophy-winner">Love Thy Nabers (2-0) vs. Camfan1 (1-1)</div>
+                <div class="trophy-reason">Sam Childers stayed undefeated by steering his roster smoothly to a clinical <strong>145.5 to 61.0</strong> victory.</div>
+            </div>
+
+            <div class="trophy-card award-brown">
+                <div class="trophy-icon">🌟</div>
+                <div class="trophy-name">The Offensive Shining Star</div>
+                <div class="trophy-winner">The Dart Knight (1-1) vs. Cohen's Team (1-1)</div>
+                <div class="trophy-reason">The Dart Knight powered through Faith Fighters with a brilliant <strong>130.5</strong> points, taking down Cohen's Team scoring <strong>90.0</strong>.</div>
             </div>
         </div>
 
@@ -1141,7 +1162,6 @@
                 runoffTeams.push(...teams.slice(4));
             });
 
-            // Sort overall playoff teams by record then points
             playoffTeams.sort(sortFn);
             runoffTeams.sort(sortFn);
 
