@@ -11,14 +11,14 @@
             --bg-surface: #1e1915;
             --bg-card: #28211b;
             --bg-card-hover: #332a23;
-            --blue-accent: #3b82f6;
-            --blue-glow: rgba(59, 130, 246, 0.35);
+            --gold-accent: #d9a441;
+            --gold-glow: rgba(217, 164, 65, 0.35);
             --brown-accent: #a65a2a;
             --tan-accent: #e2c08d;
             --text-main: #f8fafc;
             --text-muted: #a39585;
             --border: #3d3228;
-            --border-blue: #1d4ed8;
+            --gold-deep: #8a6420;
         }
 
         * { box-sizing: border-box; }
@@ -33,44 +33,30 @@
             min-height: 100vh;
             background-image: 
                 radial-gradient(circle at 15% 15%, rgba(166, 90, 42, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 85% 85%, rgba(217, 164, 65, 0.06) 0%, transparent 40%);
         }
 
         header {
             background: linear-gradient(180deg, #181412 0%, var(--bg-surface) 100%);
-            border-bottom: 3px solid var(--brown-accent);
-            border-top: 4px solid #1a383b;
-            padding: 2.5rem 1.5rem 1.75rem;
+            border-bottom: 2px solid var(--gold-accent);
+            padding: 2.75rem 1.5rem 2rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             text-align: center;
             position: relative;
         }
 
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(59, 130, 246, 0.1);
-            padding: 0.25rem 0.8rem;
-            border-radius: 20px;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            font-family: 'Oswald', sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 3px;
-            color: var(--blue-accent);
-            text-transform: uppercase;
-            margin-bottom: 0.3rem;
-            font-weight: 600;
-        }
         
         header h1 {
             font-family: 'Oswald', sans-serif;
-            margin: 0.6rem 0 0.3rem 0;
-            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            margin: 0 0 0.35rem 0;
+            font-size: clamp(2.4rem, 6vw, 3.8rem);
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--tan-accent);
-            text-shadow: 0 3px 12px rgba(0,0,0,0.5);
+            background: linear-gradient(180deg, #f6e7bd 0%, var(--tan-accent) 55%, #c39a58 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .header-subtitle {
@@ -110,17 +96,17 @@
         }
         
         .nav-btn.active { 
-            background: linear-gradient(135deg, var(--blue-accent), #1d4ed8); 
-            color: #ffffff; 
-            border-color: var(--blue-accent);
-            box-shadow: 0 0 15px var(--blue-glow);
+            background: linear-gradient(135deg, var(--gold-accent), #b07f2a); 
+            color: #1a120b; 
+            border-color: var(--gold-accent);
+            box-shadow: 0 0 15px var(--gold-glow);
         }
 
         main {
             flex: 1;
             max-width: 1240px;
-            margin: 2rem auto;
-            padding: 0 1.25rem;
+            margin: 2.75rem auto;
+            padding: 0 1.5rem;
             width: 100%;
             display: none;
             animation: fadeIn 0.35s ease-in-out;
@@ -134,11 +120,11 @@
         
         .trophy-section-title {
             font-family: 'Oswald', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             color: var(--text-main);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -147,8 +133,8 @@
         .trophy-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
         .trophy-card {
@@ -158,6 +144,11 @@
             border: 1px solid var(--border);
             text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .trophy-card:hover, .news-card:hover, .division-card:hover, .espn-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.45);
         }
 
         .trophy-icon { font-size: 2.2rem; margin-bottom: 0.5rem; display: inline-block; }
@@ -167,17 +158,18 @@
 
         .award-gold .trophy-name { color: var(--tan-accent); }
         .award-gold { border-top: 4px solid var(--tan-accent); }
-        .award-blue .trophy-name { color: var(--blue-accent); }
-        .award-blue { border-top: 4px solid var(--blue-accent); }
+        .award-blue .trophy-name { color: var(--gold-accent); }
+        .award-blue { border-top: 4px solid var(--gold-accent); }
         .award-brown .trophy-name { color: var(--brown-accent); }
         .award-brown { border-top: 4px solid var(--brown-accent); }
 
-        .news-container { display: flex; flex-direction: column; gap: 1.5rem; }
+        .news-container { display: flex; flex-direction: column; gap: 2rem; }
         
         .news-card {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
             background: var(--bg-surface);
             border-radius: 14px;
-            padding: 2rem;
+            padding: 2.5rem;
             border: 1px solid var(--border);
             border-left: 6px solid var(--brown-accent);
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
@@ -191,9 +183,9 @@
         }
 
         .news-badge {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--blue-accent);
-            border: 1px solid var(--border-blue);
+            background: rgba(217, 164, 65, 0.15);
+            color: var(--gold-accent);
+            border: 1px solid var(--gold-deep);
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
             font-size: 0.75rem;
@@ -203,7 +195,7 @@
         }
 
         .news-date { color: var(--tan-accent); font-family: 'Oswald', sans-serif; font-size: 0.95rem; letter-spacing: 1px; }
-        .news-card h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; margin: 0 0 1rem 0; color: var(--text-main); }
+        .news-card h2 { font-family: 'Oswald', sans-serif; font-size: 2rem; margin: 0 0 1rem 0; color: var(--text-main); }
         .news-card p { line-height: 1.7; color: #d1c7bc; font-size: 1.05rem; margin-bottom: 1rem; }
 
         .view-toggle-bar {
@@ -243,6 +235,7 @@
         }
 
         .division-card {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
             background: var(--bg-surface);
             border-radius: 14px;
             overflow: hidden;
@@ -255,7 +248,7 @@
             background: linear-gradient(180deg, var(--bg-card), var(--bg-surface));
             padding: 1.2rem 1.5rem;
             font-family: 'Oswald', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             text-transform: uppercase;
             color: var(--tan-accent);
             border-bottom: 2px solid var(--brown-accent);
@@ -314,14 +307,14 @@
         }
 
         .top-rank .rank-num {
-            background: var(--blue-accent);
-            color: #fff;
-            border-color: var(--blue-accent);
-            box-shadow: 0 0 8px var(--blue-glow);
+            background: var(--gold-accent);
+            color: #1a120b;
+            border-color: var(--gold-accent);
+            box-shadow: 0 0 8px var(--gold-glow);
         }
 
         .team-name { color: var(--text-main); font-weight: 700; }
-        .pf-val { color: var(--tan-accent); font-family: 'Oswald', sans-serif; font-size: 1.1rem; }
+        .pf-val { color: var(--tan-accent); font-family: 'Oswald', sans-serif; font-size: 1.3rem; }
         .record-val { color: #cbd5e1; font-family: monospace; font-size: 0.95rem; }
 
         .espn-links {
@@ -332,6 +325,7 @@
         }
 
         .espn-card {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
             background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: 10px;
@@ -349,8 +343,8 @@
 
         .espn-btn {
             display: inline-block;
-            background: var(--blue-accent);
-            color: white;
+            background: var(--gold-accent);
+            color: #1a120b;
             text-decoration: none;
             padding: 0.5rem 1.25rem;
             border-radius: 6px;
@@ -360,7 +354,7 @@
             transition: background 0.2s;
         }
 
-        .espn-btn:hover { background: #1d4ed8; }
+        .espn-btn:hover { background: #b07f2a; }
 
         footer {
             text-align: center;
@@ -371,7 +365,40 @@
             margin-top: 3rem;
             background: var(--bg-surface);
         }
-    </style>
+
+        /* slim top bar */
+        .slimbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            background: rgba(18, 15, 13, 0.94);
+            border-bottom: 1px solid var(--border);
+            padding: 0.45rem 1rem;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        .slim-week {
+            background: var(--gold-accent);
+            color: #1a120b;
+            font-weight: 700;
+            padding: 0.15rem 0.65rem;
+            border-radius: 20px;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+        .slim-tag {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+</style>
 <style id="startsit-css">
 .ss-pills{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1rem}
 .ss-pill{border:1px solid var(--border);background:var(--bg-card);color:var(--tan-accent);font-size:0.8rem;font-weight:700;padding:0.4rem 0.9rem;border-radius:999px;cursor:pointer}
@@ -406,8 +433,9 @@
 </head>
 <body>
 
+    <div class="slimbar"><span class="slim-week" id="slim-week">WEEK 3</span><span class="slim-tag">3 Divisions &bull; 36 Teams &bull; One Champion</span></div>
+
     <header>
-        <div class="eyebrow"><span>🏈</span> 3 Divisions • 36 Teams • One Champion</div>
         <h1>Cornerstone Men's League</h1>
         <div class="header-subtitle">Official Central Command Hub</div>
 
