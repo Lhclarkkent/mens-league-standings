@@ -405,7 +405,16 @@
 .ss-pill.on{background:var(--tan-accent);border-color:var(--tan-accent);color:#241a10}
 .ss-tier{font-size:0.72rem;font-weight:800;letter-spacing:0.14em;color:var(--tan-accent);margin:1rem 0 0.5rem;text-transform:uppercase}
 .ss-row{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:0.55rem 0.7rem;margin-bottom:0.4rem}
-.ss-topline{display:flex;align-items:center;gap:0.65rem}
+.ss-topline{display:flex;align-items:center;gap:0.65rem;cursor:pointer}
+.ss-chev{color:var(--text-muted);font-size:1.15rem;line-height:1;transition:transform .2s}
+.ss-row.open .ss-chev{transform:rotate(90deg)}
+.ss-detail{margin-top:.6rem;padding-top:.6rem;border-top:1px dashed var(--border)}
+.ss-agree{font-size:.82rem;color:var(--text-main);margin-bottom:.6rem}
+.ss-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.7rem;text-align:center}
+.ss-stat{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:.45rem .3rem}
+.ss-stat b{display:block;font-family:'Oswald',sans-serif;font-size:1rem;color:var(--tan-accent)}
+.ss-stat span{font-size:.62rem;color:var(--text-muted);letter-spacing:1px}
+.ss-dlabel{font-size:.66rem;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:.4rem}
 .ss-rank{width:1.65rem;height:1.65rem;flex:0 0 1.65rem;border-radius:50%;background:var(--border);color:var(--tan-accent);font-size:0.75rem;font-weight:800;display:flex;align-items:center;justify-content:center}
 .ss-main{flex:1;min-width:0}
 .ss-name{font-size:0.9rem;font-weight:700;color:var(--text-main)}
@@ -1147,6 +1156,30 @@
                     + '<div class="ss-rmark" style="left:' + m.toFixed(1) + '%"></div></div>'
                     + '<div class="ss-rlabel">Expert range #' + lo + '\u2013#' + hi + '</div></div>';
             }
+            function agreeHtml(r, pos) {
+                const lo = parseFloat(r.rank_min), hi = parseFloat(r.rank_max);
+                if (!(lo > 0) || !(hi > 0)) return '';
+                const spread = hi - lo;
+                let txt;
+                if (spread <= 1) txt = 'Near-unanimous &mdash; all experts within a spot.';
+                else if (spread <= 4) txt = 'Broad agreement &mdash; experts range ' + pos + lo + ' to ' + pos + hi + '.';
+                else if (spread <= 8) txt = 'Experts are split &mdash; ' + pos + lo + ' to ' + pos + hi + '.';
+                else txt = 'Real disagreement &mdash; anywhere from ' + pos + lo + ' to ' + pos + hi + '.';
+                return '<div class="ss-agree">' + txt + '</div>';
+            }
+            function detailHtml(r, pos) {
+                const lo = parseFloat(r.rank_min), hi = parseFloat(r.rank_max);
+                let stats = '';
+                if ((lo > 0) && (hi > 0)) {
+                    stats = '<div class="ss-stats">'
+                        + '<div class="ss-stat"><span>HIGHEST</span><b>#' + lo + '</b></div>'
+                        + '<div class="ss-stat"><span>LOWEST</span><b>#' + hi + '</b></div>'
+                        + '<div class="ss-stat"><span>BYE</span><b>' + (r.bye ? escHtml(r.bye) : '&ndash;') + '</b></div></div>';
+                }
+                const sites = sitesHtml(r);
+                const sec = sites ? '<div class="ss-dlabel">COLUMNISTS</div>' + sites : '';
+                return '<div class="ss-detail" hidden>' + agreeHtml(r, pos) + stats + sec + '</div>';
+            }
             function render() {
                 document.getElementById('ssPills').innerHTML = POSITIONS.map(p =>
                     '<button class="ss-pill' + (p === ssPos ? ' on' : '') + '" data-p="' + p + '">' + p + '</button>').join('');
@@ -1157,16 +1190,40 @@
                 (DATA[ssPos] || []).forEach((r, i) => {
                     const tier = tierOf(ssPos, i);
                     if (tier !== lastTier) { htm += '<div class="ss-tier">' + tier + '</div>'; lastTier = tier; }
-                    htm += '<div class="ss-row"><div class="ss-topline"><div class="ss-rank">' + (i + 1) + '</div>'
+                    htm += '<div class="ss-row" data-i="' + i + '"><div class="ss-topline" role="button" tabindex="0" aria-expanded="false"><div class="ss-rank">' + (i + 1) + '</div>'
                         + '<div class="ss-main"><div class="ss-name">' + escHtml(r.name) + '</div>'
                         + '<div class="ss-meta">' + escHtml(r.team) + ' &middot; ' + escHtml(r.opp) + '</div></div>'
                         + '<div class="ss-grade ' + gradeClass(r.grade) + '">' + escHtml(r.grade || '\u2013') + '</div>'
-                        + '<div class="ss-proj">' + escHtml(r.proj || '') + '</div></div>'
+                        + '<div class="ss-proj">' + escHtml(r.proj || '') + '</div>'
+                        + '<div class="ss-chev">&rsaquo;</div></div>'
                         + rangeHtml(r, (DATA[ssPos] || []).length)
-                        + sitesHtml(r) + '</div>';
+                        + detailHtml(r, ssPos) + '</div>';
                 });
                 document.getElementById('ssList').innerHTML = htm;
             }
+            function toggleRow(top) {
+                const row = top.closest('.ss-row');
+                const detail = row.querySelector('.ss-detail');
+                const wasOpen = row.classList.contains('open');
+                document.querySelectorAll('#ssList .ss-row.open').forEach(o => {
+                    o.classList.remove('open');
+                    o.querySelector('.ss-detail').hidden = true;
+                    o.querySelector('.ss-topline').setAttribute('aria-expanded', 'false');
+                });
+                if (!wasOpen) {
+                    row.classList.add('open');
+                    detail.hidden = false;
+                    top.setAttribute('aria-expanded', 'true');
+                }
+            }
+            document.getElementById('view-startsit').addEventListener('click', e => {
+                const top = e.target.closest('.ss-topline');
+                if (top) toggleRow(top);
+            });
+            document.getElementById('view-startsit').addEventListener('keydown', e => {
+                const top = e.target.closest('.ss-topline');
+                if (top && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggleRow(top); }
+            });
             render();
         })();
         </script>
