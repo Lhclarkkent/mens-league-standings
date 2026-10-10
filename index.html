@@ -1605,6 +1605,8 @@
     function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
         return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
     function slotLabel(s){ return s === 'RB/WR/TE' ? 'FLEX' : s; }
+    function normTeam(s){ return String(s == null ? '' : s).trim()
+        .replace(/[‘’]/g, "'"); }
     var host = document.getElementById('standingsContent');
     if (!host) return;
     host.addEventListener('click', function(e) {
@@ -1613,7 +1615,7 @@
         var next = tr.nextElementSibling;
         if (next && next.classList.contains('lu-detail')) { next.remove(); return; }
         host.querySelectorAll('.lu-detail').forEach(function(el){ el.remove(); });
-        var team = tr.querySelector('.team-name').textContent.trim();
+        var team = normTeam(tr.querySelector('.team-name').textContent);
         var div = '';
         var badge = tr.querySelector('.news-badge');
         if (badge) { div = badge.textContent.trim(); }
