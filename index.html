@@ -457,6 +457,19 @@
 .inj-note{font-size:0.78rem;color:var(--text-muted);margin-top:0.15rem}
 .inj-rank{font-family:'Oswald',sans-serif;color:var(--tan-accent);font-size:0.95rem;white-space:nowrap}
 </style>
+<style id="lineups-css">
+#standingsContent tbody tr{cursor:pointer}
+#standingsContent tr.lu-detail{cursor:default}
+.lu-wrap{padding:0.2rem 0}
+.lu-title{font-size:0.72rem;letter-spacing:1px;color:var(--text-muted);margin-bottom:0.5rem}
+.lu-title em{font-style:normal;letter-spacing:0;text-transform:none}
+.lu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0.4rem}
+.lu-slot{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:0.4rem 0.55rem}
+.lu-slot span{display:block;font-size:0.62rem;letter-spacing:1px;color:var(--text-muted)}
+.lu-slot b{display:block;font-size:0.85rem}
+.lu-slot i{display:block;font-style:normal;font-size:0.7rem;color:var(--text-muted)}
+.lu-empty{font-size:0.82rem;color:var(--text-muted);padding:0.4rem 0}
+</style>
 </head>
 <body>
 
@@ -1584,5 +1597,50 @@
     <!-- GoatCounter site analytics -->
     <script data-goatcounter="https://martinnick.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+<script id="lineups-js">
+(function() {
+    var LU = null;
+    fetch('lineups.json?' + Date.now()).then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(d){ LU = d; }).catch(function(){});
+    function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+    function slotLabel(s){ return s === 'RB/WR/TE' ? 'FLEX' : s; }
+    var host = document.getElementById('standingsContent');
+    if (!host) return;
+    host.addEventListener('click', function(e) {
+        var tr = e.target.closest('tr');
+        if (!tr || tr.classList.contains('lu-detail') || !tr.querySelector('.team-name')) return;
+        var next = tr.nextElementSibling;
+        if (next && next.classList.contains('lu-detail')) { next.remove(); return; }
+        host.querySelectorAll('.lu-detail').forEach(function(el){ el.remove(); });
+        var team = tr.querySelector('.team-name').textContent.trim();
+        var div = '';
+        var badge = tr.querySelector('.news-badge');
+        if (badge) { div = badge.textContent.trim(); }
+        else {
+            var card = tr.closest('.division-card');
+            if (card) { div = card.querySelector('.div-header span').textContent.trim(); }
+        }
+        var entry = LU && LU.leagues && LU.leagues[div] && LU.leagues[div][team];
+        var ncols = tr.cells.length;
+        var inner;
+        if (!entry || !entry.starters || !entry.starters.length) {
+            inner = '<div class="lu-empty">Lineup not available yet.</div>';
+        } else {
+            var slots = entry.starters.map(function(s){
+                return '<div class="lu-slot"><span>' + esc(slotLabel(s.slot)) + '</span><b>' +
+                    esc(s.name) + '</b><i>' + esc(s.pos) + ' &middot; ' + esc(s.team) + '</i></div>';
+            }).join('');
+            inner = '<div class="lu-wrap"><div class="lu-title">STARTING LINEUP' +
+                (LU.updated ? ' <em>&mdash; as of ' + esc(LU.updated) + '</em>' : '') +
+                '</div><div class="lu-grid">' + slots + '</div></div>';
+        }
+        var dtr = document.createElement('tr');
+        dtr.className = 'lu-detail';
+        dtr.innerHTML = '<td colspan="' + ncols + '">' + inner + '</td>';
+        tr.after(dtr);
+    });
+})();
+</script>
 </body>
 </html>
